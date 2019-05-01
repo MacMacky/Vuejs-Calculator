@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { equalsLogic } from './helpers';
+import { equalsLogic, returnRealNum } from './helpers';
 
 
 
@@ -30,10 +30,10 @@ export default new Vuex.Store({
       else if (state.value == '0') {
         state.value = payload;
       } else if (payload == '√') {
-        state.value = Math.sqrt(state.value % 1 < 1 ? parseFloat(state.value) : parseInt(state.value)).toString();
+        state.value = Math.sqrt(returnRealNum(state.value)).toString();
         //
       } else if (payload == 'x²') {
-
+        state.value = Math.pow(returnRealNum(state.value), 2).toString();
       }
       else if (payload == '=') {
         state.ops.push(state.value);
