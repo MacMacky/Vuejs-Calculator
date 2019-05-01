@@ -27,18 +27,18 @@ import Row5 from "./BtnRow5";
 import Row6 from "./BtnRow6";
 
 export default {
-  data() {
-    return {
-      value: "",
-      ops: []
-    };
-  },
   methods: {
     handleClick(symbol) {
-      console.log(symbol);
+      this.$store.dispatch("addNewOperation", symbol);
     },
     handleKeyPress(e) {
       e.preventDefault();
+    }
+  },
+  props: {
+    value: {
+      type: String,
+      required: true
     }
   },
   components: {
