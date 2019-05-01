@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <Container/>
+      <Container :value="this.$store.state.value" :countval="this.$store.state.count"/>
     </v-content>
   </v-app>
 </template>
@@ -13,11 +13,6 @@ export default {
   name: "App",
   components: {
     Container
-  },
-  data() {
-    return {
-      //
-    };
   }
 };
 </script>
