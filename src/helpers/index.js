@@ -28,8 +28,8 @@ const equalsLogic = (ops = [], value = '') => {
 
 const mathLogic = (num1, num2, symbol) => {
   let value = 0;
-  num1 = num1 % 1 < 1 ? parseFloat(num1) : parseInt(num1);
-  num2 = num2 % 1 < 1 ? parseFloat(num2) : parseInt(num2);
+  num1 = returnRealNum(num1);
+  num2 = returnRealNum(num2);
   switch (symbol) {
     case '+':
       value = num1 + num2;
@@ -50,6 +50,12 @@ const mathLogic = (num1, num2, symbol) => {
   return value;
 };
 
+
+const returnRealNum = (num) => {
+  return num % 1 < 1 ? parseFloat(num) : parseInt(num)
+}
+
 export {
-  equalsLogic
+  equalsLogic,
+  returnRealNum
 }
