@@ -16,7 +16,21 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_OPERATION(state, payload) {
-      if (state.isMathSignClicked && NUM_REGEX.test(payload) && !SIGN_REGEX.test(payload)) {
+      if (payload == '=') {
+        if (state.value != '0') {
+          state.ops.push(state.value);
+          const val = equalsLogic(state.ops, state.value).toString();
+          state.value = val;
+          state.ops.length = 0;
+        }
+      }
+      else if (payload == 'CE') {
+        state.value = '0';
+      }
+      else if (payload == 'C') {
+        state.ops.length = 0, state.value = '0';
+      }
+      else if (state.isMathSignClicked && NUM_REGEX.test(payload) && !SIGN_REGEX.test(payload)) {
         state.value = payload;
         state.isMathSignClicked = false;
       }
@@ -35,11 +49,7 @@ export default new Vuex.Store({
       } else if (payload == 'x²') {
         state.value = Math.pow(returnRealNum(state.value), 2).toString();
       }
-      else if (payload == '=') {
-        state.ops.push(state.value);
-        const val = equalsLogic(state.ops, state.value);
-        state.value = val;
-      }
+
 
     }
   },
