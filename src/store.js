@@ -29,6 +29,9 @@ export default new Vuex.Store({
       }
       else if (state.value == '0') {
         state.value = payload;
+      } else if (payload == '√') {
+        state.value = Math.sqrt(state.value % 1 < 1 ? parseFloat(state.value) : parseInt(state.value)).toString();
+        //
       } else if (payload == 'x²') {
 
       }
