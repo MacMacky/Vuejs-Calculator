@@ -4,7 +4,7 @@
       <v-flex mb-4 xs3 md6 lg5 xl3>
         <v-card class="py-2 px-0" color="grey lighten-3">
           <v-img :src="require('../assets/logo.png')" class="my-3" contain height="200"></v-img>
-          <v-text-field solo class="px-3" v-model="value"/>
+          <v-text-field solo class="px-3" v-model="value" @keypress="handleKeyPress"/>
           <row1 :handleClick="handleClick"/>
           <row2 :handleClick="handleClick"/>
           <row3 :handleClick="handleClick"/>
@@ -36,6 +36,9 @@ export default {
   methods: {
     handleClick(symbol) {
       console.log(symbol);
+    },
+    handleKeyPress(e) {
+      e.preventDefault();
     }
   },
   components: {
