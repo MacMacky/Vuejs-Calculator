@@ -59,7 +59,7 @@ export default new Vuex.Store({
           state.value = Math.pow(returnRealNum(state.value), 2).toString();
           break;
         default:
-          break;
+          return { ...state, value: state.value };
       }
     }
   },
