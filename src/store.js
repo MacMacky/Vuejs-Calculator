@@ -58,8 +58,13 @@ export default new Vuex.Store({
         case 'x²':
           state.value = Math.pow(returnRealNum(state.value), 2).toString();
           break;
+        case '±':
+          if (state.value == '0') {
+            return state.value = '0';
+          }
+          return state.value = state.value.indexOf('-') == -1 ? `-${state.value}` : state.value.substring(1);
         default:
-          return { ...state, value: state.value };
+          return state;
       }
     }
   },
