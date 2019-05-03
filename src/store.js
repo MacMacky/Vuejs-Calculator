@@ -16,41 +16,51 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_OPERATION(state, payload) {
-      if (payload == '=') {
-        if (state.value != '0') {
-          state.ops.push(state.value);
-          const val = equalsLogic(state.ops, state.value).toString();
-          state.value = val;
-          state.ops.length = 0;
-        }
+      switch (payload) {
+        case '=':
+          if (state.value != '0') {
+            state.ops.push(state.value);
+            const val = equalsLogic(state.ops, state.value).toString();
+            state.value = val;
+            state.ops.length = 0;
+          }
+          break;
+        case '0':
+          state.value = parseInt(state.value) === 0 ? '0' : state.value + '0';
+          break;
+        case '1': case '2': case '3':
+        case '4': case '5': case '6':
+        case '7': case '8': case '9':
+          if (state.isMathSignClicked) {
+            state.value = payload;
+          } else if (state.value === '0') {
+            state.value = payload;
+          }
+          else {
+            state.value += payload;
+          }
+          state.isMathSignClicked = false;
+          break;
+        case '+': case '-':
+        case '÷': case '×':
+          state.isMathSignClicked = true;
+          state.ops.push(state.value, payload);
+          break;
+        case 'CE':
+          state.value = '0';
+          break;
+        case 'C':
+          state.ops.length = 0, state.value = '0';
+          break;
+        case '√':
+          state.value = Math.sqrt(returnRealNum(state.value)).toString();
+          break;
+        case 'x²':
+          state.value = Math.pow(returnRealNum(state.value), 2).toString();
+          break;
+        default:
+          break;
       }
-      else if (payload == 'CE') {
-        state.value = '0';
-      }
-      else if (payload == 'C') {
-        state.ops.length = 0, state.value = '0';
-      }
-      else if (state.isMathSignClicked && NUM_REGEX.test(payload) && !SIGN_REGEX.test(payload)) {
-        state.value = payload;
-        state.isMathSignClicked = false;
-      }
-      else if (NUM_REGEX.test(payload) && state.value != '0') {
-        state.isMathSignClicked = false;
-        state.value += payload;
-      } else if (SIGN_REGEX.test(payload) && !state.isMathSignClicked) {
-        state.isMathSignClicked = true;
-        state.ops.push(state.value, payload);
-      }
-      else if (state.value == '0') {
-        state.value = payload;
-      } else if (payload == '√') {
-        state.value = Math.sqrt(returnRealNum(state.value)).toString();
-        //
-      } else if (payload == 'x²') {
-        state.value = Math.pow(returnRealNum(state.value), 2).toString();
-      }
-
-
     }
   },
   actions: {
