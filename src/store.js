@@ -28,6 +28,11 @@ export default new Vuex.Store({
         case '0':
           state.value = parseInt(state.value) === 0 ? '0' : state.value + '0';
           break;
+        case '.':
+          if (state.value.indexOf('.') === -1 && state.value !== '0') {
+            state.value = `${state.value}.`
+          }
+          break;
         case '1': case '2': case '3':
         case '4': case '5': case '6':
         case '7': case '8': case '9':
