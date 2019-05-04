@@ -60,6 +60,9 @@ export default new Vuex.Store({
         case '√':
           state.value = Math.sqrt(returnRealNum(state.value)).toString();
           break;
+        case '1/x':
+          state.value = (1 / returnRealNum(state.value)).toString();
+          break;
         case 'x²':
           state.value = Math.pow(returnRealNum(state.value), 2).toString();
           break;
