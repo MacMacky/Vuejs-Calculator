@@ -6,7 +6,7 @@ import { equalsLogic, returnRealNum } from './helpers';
 
 Vue.use(Vuex)
 
-export const NUM_REGEX = /[0-9]/, SIGN_REGEX = /[×÷+-]/;
+export const NUM_REGEX = /[0-9]/, SIGN_REGEX = /[×÷+-]$/;
 
 export default new Vuex.Store({
   state: {
